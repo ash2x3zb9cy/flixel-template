@@ -1,0 +1,12 @@
+name: "lime-flash-debug (default)"
+cmd: "lime"
+args:
+    - "test"
+    - "flash"
+    - "-debug"
+targets:
+    lime-cpp-final:
+        args:
+            - "test"
+            - "cpp"
+            - "-final"
