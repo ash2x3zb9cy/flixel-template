@@ -25,7 +25,7 @@ class PlayState extends FlxState {
 		player = new Player(FlxG.width/2, 400);
 		entities.add(player);
 
-		var testEnemy = new Entity(100, 10);
+		var testEnemy = new TweenEntity(100, 10);
 		testEnemy.team = EnemyTeam;
 		testEnemy.makeGraphic(64, 64, 0xffff00ff);
 		entities.add(testEnemy);
