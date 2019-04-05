@@ -11,7 +11,6 @@ class Bullet extends FlxSprite {
 		x += xspeed;
 		y += yspeed;
 		if (!isOnScreen()) {
-			trace("KILL");
 			kill();
 		}
 	}
