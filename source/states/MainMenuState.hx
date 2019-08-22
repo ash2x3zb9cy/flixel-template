@@ -16,5 +16,10 @@ class MainMenuState extends FlxState {
 		if (FlxG.keys.firstPressed() != -1) {
 			FlxG.switchState(new states.PlayState());
 		}
+
+		// skip main menu in debug mode
+		#if debug
+		FlxG.switchState(new states.PlayState());
+		#end
 	}
 }

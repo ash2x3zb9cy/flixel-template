@@ -1,45 +1,34 @@
 package states;
 
-import haxe.Cson;
 import flixel.FlxG;
-import openfl.Assets;
 import flixel.FlxState;
+import flixel.FlxSprite;
 
 import flixel.text.FlxText;
 
 class PlayState extends FlxState {
+	var square: FlxSprite;
+	var player: entities.Player;
 	override public function create() {
 		super.create();
 
 		// enable use of trace() with the debugger
 		FlxG.log.redirectTraces = true;
 
-		// hello world
-		var data = readCson(AssetPaths.sampledata__cson);
-		trace(data);
-		var text = new flixel.text.FlxText(0, 0, FlxG.width, data.hello, 24);
-		text.alignment = "center";
-		add(text);
+		square = (new FlxSprite(64, 128)).makeGraphic(32, 32, 0xffff0000);
+		add(square);
 
-		var spinner = new Spinner();
-		add(spinner);
+		player = new entities.Player();
+		add(player);
 
-		// spinning square
-		var square = new flixel.FlxSprite(FlxG.width/2,  120);
-		square.makeGraphic(64, 64, 0xffff0000);
-		spinner.add(square);
-
-		// spinning sprite
-		var sprite = new flixel.FlxSprite(FlxG.width/2, FlxG.height/2, AssetPaths.image__png);
-		spinner.add(sprite);
+		add(new FlxText(0, 0, 0, CsonLib.readFile(AssetPaths.sampledata__cson).text));
 	}
 
 	override public function update(elapsed: Float) {
 		super.update(elapsed);
-	}
 
-	function readCson(filename: String): Dynamic {
-		var file = Assets.getText(filename);
-		return Cson.parse(file);
+		square.x++;
+
+		FlxG.collide(player, square);
 	}
 }
